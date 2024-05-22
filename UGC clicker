@@ -1,10 +1,17 @@
---new click for ugc game source made by olailei
+--rate my script source pls
 
-game.StarterGui:SetCore('SendNotification', { Title = 'Stealling your acc...'; Text = ''; })
+local Players = game:GetService("Players")
 
-task.wait(2)
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
 
-game.StarterGui:SetCore('SendNotification', { Title = 'Done! ty for ur robux lol'; Text = ''; })
+local function DestroyGui()
+    PlayerGui:FindFirstChild("SetGameFavorite"):Destroy()
+end
+
+DestroyGui()
+
+game.StarterGui:SetCore('SendNotification', { Title = 'Favorite game screen hide'; Text = 'Enjoy!'; })
 
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
  
@@ -19,8 +26,30 @@ end
 end)
 
 KillingCheats:CreateToggle("Auto Spin Wheel", function(value)
-while wait(1) do
+while wait(5) do
 game:GetService("ReplicatedStorage").Remotes.SpinWheel:FireServer()
+end
+end)
+
+KillingCheats:CreateButton("Auto Claim Gifts", function()--idk how to make it stop
+while wait() do
+game:GetService("ReplicatedStorage").Remotes.ClaimPlaytimeReward:FireServer(1)
+
+task.wait(5)
+
+game:GetService("ReplicatedStorage").Remotes.ClaimPlaytimeReward:FireServer(2)
+
+task.wait(5)
+
+game:GetService("ReplicatedStorage").Remotes.ClaimPlaytimeReward:FireServer(3)
+
+task.wait(5)
+
+game:GetService("ReplicatedStorage").Remotes.ClaimPlaytimeReward:FireServer(4)
+
+task.wait(5)
+
+game:GetService("ReplicatedStorage").Remotes.ClaimPlaytimeReward:FireServer(5)
 end
 end)
 
@@ -58,11 +87,22 @@ KillingCheats:CreateButton("Anti AFK", function()
         VirtualUser:ClickButton2(Vector2.new())
       end)
     end
-    game.StarterGui:SetCore('SendNotification', { Title = 'Fluxus > Arceus X'; Text = 'Anti-AFK activated!'; })
+    game.StarterGui:SetCore('SendNotification', { Title = 'ocx <3'; Text = 'Anti-AFK activated!'; })
     end)
+
+local KillingCheats = PhantomForcesWindow:NewSection("Hatch Eggs")
+
+KillingCheats:CreateButton("Hatch Common egg", function()--just spam this how much times u want
+game:GetService("ReplicatedStorage").Remotes.BuyEgg:FireServer("Common")
+end)
+
+KillingCheats:CreateButton("Hatch Uncommon egg", function()--this too
+game:GetService("ReplicatedStorage").Remotes.BuyEgg:FireServer("Uncommon")
+end)
 
 local KillingCheats = PhantomForcesWindow:NewSection("Credits")
 
-KillingCheats:CreateButton("made by Kai Viado", function()
-print("dont skid my source")
+KillingCheats:CreateButton("made by asdfghjkln", function()
+print("If you executed this script, you accepted our terms of subscribing to the ocx channel")
 end)
+--I promise be better with game scripts.. just wait me
