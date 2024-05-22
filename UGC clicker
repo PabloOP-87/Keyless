@@ -1,18 +1,5 @@
 --rate my script source pls
 
-local Players = game:GetService("Players")
-
-local Player = Players.LocalPlayer
-local PlayerGui = Player:WaitForChild("PlayerGui")
-
-local function DestroyGui()
-    PlayerGui:FindFirstChild("SetGameFavorite"):Destroy()
-end
-
-DestroyGui()
-
-game.StarterGui:SetCore('SendNotification', { Title = 'Favorite game screen hide'; Text = 'Enjoy!'; })
-
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
  
 local PhantomForcesWindow = Library:NewWindow("FREE UGCS CLICKER")
