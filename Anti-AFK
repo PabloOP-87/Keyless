@@ -1,0 +1,26 @@
+        local player = game.Players.LocalPlayer
+        local VirtualUser = game:GetService("VirtualUser")
+        
+        repeat wait() until player and player.Character
+
+        local GC = getconnections or get_signal_cons
+        if GC then
+            for _, v in pairs(GC(player.Idled)) do
+                if v["Disable"] then
+                    v["Disable"](v)
+                elseif v["Disconnect"] then
+                    v["Disconnect"](v)
+                end
+            end
+        else
+            player.Idled:Connect(function()
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton2(Vector2.new())
+            end)
+        end
+
+        game.StarterGui:SetCore('SendNotification', { 
+            Title = 'Notification', 
+            Text = 'Anti-AFK enabled',
+            Duration = 3
+        })
