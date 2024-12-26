@@ -56,6 +56,43 @@ w1:Button(
     end
 )
 
+w1:Button(
+    "Join low server",
+    function()
+        local Player = game.Players.LocalPlayer
+        local Http = game:GetService("HttpService")
+        local TPS = game:GetService("TeleportService")
+        local Api = "https://games.roblox.com/v1/games/"
+        
+        local _place, _id = game.PlaceId, game.JobId
+        local _servers = Api.._place.."/servers/Public?sortOrder=Asc&limit=10"
+
+        function ListServers(cursor)
+            local Raw = game:HttpGet(_servers .. ((cursor and "&cursor="..cursor) or ""))
+            return Http:JSONDecode(Raw)
+        end
+        
+        local time_to_wait = 5
+        
+        while wait(time_to_wait) do
+            if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
+                Player.Character.HumanoidRootPart.Anchored = true
+            end
+            
+            local Servers = ListServers()
+            if #Servers.data > 0 then
+                local Server = Servers.data[math.random(1, #Servers.data)]
+                
+                local serverId = tostring(Server.id)
+                
+                TPS:TeleportToPlaceInstance(_place, serverId, Player)
+            else
+                print("No servers found")
+            end
+        end
+    end
+)
+
 w1:Label("YT: PabloScripts21")
 
 w1:Button(
