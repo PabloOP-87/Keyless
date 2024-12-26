@@ -1,0 +1,90 @@
+-- this is 0 x 3 7 library if you wanted the name
+
+local library = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/0x"))()
+
+local w1 = library:Window("MM2 Christmas 2024")
+
+local autofarmEnabled = false
+
+w1:Toggle(
+    "Autofarm Coins",
+    "afc",
+    false,
+    function(toggled)
+        autofarmEnabled = toggled
+    end
+)
+
+spawn(function()
+    while true do
+        if autofarmEnabled then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyn-ic/MM2-AutoFarm/main/FreeScript.lua", true))()
+        end
+        wait(5) -- 5 sec wait time to execute again bc im lazy to change the code lol
+    end
+end)
+
+w1:Button(
+    "Anti-AFK",
+    function()
+        local player = game.Players.LocalPlayer
+        local VirtualUser = game:GetService("VirtualUser")
+        
+        repeat wait() until player and player.Character
+
+        local GC = getconnections or get_signal_cons
+        if GC then
+            for _, v in pairs(GC(player.Idled)) do
+                if v["Disable"] then
+                    v["Disable"](v)
+                elseif v["Disconnect"] then
+                    v["Disconnect"](v)
+                end
+            end
+        else
+            player.Idled:Connect(function()
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton2(Vector2.new())
+            end)
+        end
+
+        game.StarterGui:SetCore('SendNotification', { 
+            Title = 'Notification', 
+            Text = 'Anti-AFK enabled',
+            Duration = 3
+        })
+    end
+)
+
+w1:Label("YT: PabloScripts21")
+
+w1:Button(
+    "Copy Youtube link",
+    function()
+        setclipboard("https://www.youtube.com/@PabloScripts21")
+        local MessageBox = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/NotificationGUI/main/source.lua"))()
+
+MessageBox.Show({Position = UDim2.new(0.5,0,0.5,0), Text = "Notification", Description = "Youtube link copied to clipboard!\n \nWill you subscribe?", MessageBoxIcon = "Question", MessageBoxButtons = "YesNo", Result = function(res)
+   if (res == "Yes") then
+       MessageBox.Show({MessageBoxButtons = "OK", Description = "Wow, tysm i luv you <3", Text = "YAYYY!"})
+   elseif (res == "No") then
+       MessageBox.Show({MessageBoxButtons = "OK", Description = "Ah, sorry to dissapoint you, I'll try better next time!", Text = "Nooooo :("})
+   end
+end})
+    end
+)
+
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+Notification:Notify(
+    {Title = "Execute an anti-kick?", Description = "this might prevent kicks from the game"},
+    {OutlineColor = Color3.fromRGB(80, 80, 80), Time = 10, Type = "option"},
+    {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State)
+        if State then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Anti-Kick/main/Anti-Kick.lua", true))()
+        else
+            print("player chose 'No'.")
+        end
+    end}
+)
